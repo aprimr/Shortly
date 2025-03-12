@@ -4,6 +4,7 @@ dotenv.config();
 import express from "express";
 import cors from "cors";
 import authRoutes from "./routes/auth.routes.js";
+import urlRoutes from "./routes/url.routes.js";
 import ConnectToDB from "./config/db.config.js";
 import removeUnverifiedUsers from "./automation/removeUnverifedUsers.js";
 
@@ -24,6 +25,7 @@ app.use(express.json());
 
 // Routes
 app.use("/api/v1/auth", authRoutes);
+app.use("/api/v1/urls", urlRoutes);
 
 //automation
 removeUnverifiedUsers();

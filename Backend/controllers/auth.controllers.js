@@ -104,7 +104,7 @@ const userSignup = async (req, res) => {
     sendVerificationCode(fullname, email, verificationCode);
 
     // create user
-    const newUser = Users.create({
+    const newUser = await Users.create({
       fullname,
       username,
       email,
