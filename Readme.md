@@ -35,12 +35,6 @@ Manage your profile and account settings with ease.
 - **Database**: MongoDB
 - **Other Tools**: Git, GitHub, Vite
 
-## 📸 Screenshots
-
-> _(Add screenshots here if available)_  
-> Example:  
-> ![Shortly Preview](./assets/shortly-preview.png)
-
 ## 📦 Installation
 
 Clone the repository and install dependencies.
