@@ -52,4 +52,57 @@ const shortUrl = async (req, res) => {
   }
 };
 
-export { shortUrl };
+const getUrls = async (req, res) => {
+  const username = req.headers.username;
+  try {
+    //Check for usernaem
+    if (!username) {
+      return res.status(400).json({ message: "Security token error" });
+    }
+
+    const user = await Users.findOne({ username });
+    if (!user) {
+      return res.status(300).json({ message: "Security token error" });
+    }
+
+    //get urls
+    const urls = await Urls.find({ username });
+
+    return res.status(200).json({ message: "Fetched", urls });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const deleteUrl = async (req, res) => {
+  const { id } = req.body;
+  try {
+    if (!id) return res.status(400).json({ message: "ID is required" });
+
+    const result = await Urls.deleteOne({ _id: new ObjectId(id) });
+    if (result.deletedCount === 0) {
+      return res.status(404).json({ message: "URL not found" });
+    }
+
+    return res.status(200).json({ message: "URL deleted" });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const getUrlById = async (req, res) => {
+  const { shortId } = req.params;
+  try {
+    const urlDetails = await Urls.findOne({ shortId });
+    if (!urlDetails) {
+      return res.status(404).json({ message: "URL not found" });
+    }
+    urlDetails.clicks++;
+    urlDetails.save();
+    return res.status(200).json({ message: "Fetched", urlDetails });
+  } catch (error) {
+    console.log("Internal server error: " + error);
+  }
+};
+
+export { shortUrl, getUrls, deleteUrl, getUrlById };

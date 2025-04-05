@@ -47,6 +47,7 @@ const userLogin = async (req, res) => {
       fullname: user.fullname,
       username: user.username,
       email: user.email,
+      profilePic: user.profilePic,
       joined: user.createdAt,
     };
 

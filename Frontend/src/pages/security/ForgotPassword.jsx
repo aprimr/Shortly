@@ -91,7 +91,6 @@ const ForgotPassword = () => {
       }
       setIsLoading(false);
     } catch (error) {
-      console.log(error);
       setError(error.response.data.message);
       setIsLoading(false);
     }

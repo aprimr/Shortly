@@ -18,7 +18,6 @@ const UserLogin = () => {
   const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
-    console.log(email);
     e.preventDefault();
     setError("");
     setIsLoading(true);
@@ -37,7 +36,6 @@ const UserLogin = () => {
         dispatch(LoginUser({ user: res.data.user, token: res.data.token }));
       }
     } catch (error) {
-      console.log(error);
       setError(error.response.data.message);
       setIsLoading(false);
     }

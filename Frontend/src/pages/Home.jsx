@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
+import validator from "validator";
 import QRCode from "react-qr-code";
 import HeroImg from "../assets/HeroImg.png";
+
 import { MdContentCopy } from "react-icons/md";
 import { FiCheck } from "react-icons/fi";
 import { IoMdArrowBack } from "react-icons/io";
@@ -11,11 +13,14 @@ import {
   MdOutlineKeyboardArrowDown,
   MdOutlineKeyboardArrowUp,
 } from "react-icons/md";
-import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { AiOutlineLoading } from "react-icons/ai";
+
+import { exportComponentAsPNG } from "react-component-export-image";
 import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
   const [originalUrl, setOriginalUrl] = useState("");
+  const [validUrl, setValidUrl] = useState(false);
   const [shortId, setShortId] = useState("");
   const [showResultPage, setShowResultPage] = useState(false);
   const [expiryDate, setExpiryDate] = useState("");
@@ -26,17 +31,40 @@ const HomePage = () => {
   const [selectedExpiry, setSelectedExpiry] = useState(null);
   const [isLoading, setIsloading] = useState(false);
 
-  const user = JSON.parse(localStorage.getItem("user") || {}); //returns empty obj if null
+  const user = JSON.parse(localStorage.getItem("user") || {});
+
+  const imageRef = useRef();
 
   const navigate = useNavigate();
   const currentDate = new Date().toISOString().split("T")[0];
+
+  useEffect(() => {
+    const options = {
+      protocols: ["http", "https"],
+      require_tld: true,
+      require_protocol: false,
+      require_host: true,
+      require_port: false,
+      require_valid_protocol: true,
+      allow_underscores: false,
+      host_whitelist: false,
+      host_blacklist: false,
+      allow_trailing_dot: false,
+      allow_protocol_relative_urls: false,
+      allow_fragments: true,
+      allow_query_components: true,
+      disallow_auth: false,
+      validate_length: true,
+    };
+    const result = validator.isURL(originalUrl, options);
+    result ? setValidUrl(true) : setValidUrl(false);
+  }, [originalUrl]);
 
   const handleShorten = async () => {
     setError("");
     setAdvanceError("");
     setIsloading(false);
-    if (!originalUrl) {
-      setError("Please enter a url");
+    if (!validUrl) {
       return;
     }
     if (expiryDate && expiryDate < currentDate) {
@@ -60,13 +88,10 @@ const HomePage = () => {
         setShortId(res.data.shortId);
       }
     } catch (error) {
-      setError(error);
+      setError(error.response.data.message);
       setShowResultPage(false);
+      setIsloading(false);
     }
-
-    setCopied(false);
-    setError("");
-    setAdvanceError("");
   };
 
   const handleCopy = () => {
@@ -127,6 +152,11 @@ const HomePage = () => {
               onChange={(e) => setOriginalUrl(e.target.value)}
             />
             <p className="text-sm text-rose-500 text-left mt-2">{error}</p>
+            {!validUrl && (
+              <p className="text-sm text-rose-500 text-left mt-2">
+                Please enter a valid url
+              </p>
+            )}
           </div>
 
           <button
@@ -230,7 +260,7 @@ const HomePage = () => {
             {!isLoading ? (
               "Shorten URL"
             ) : (
-              <AiOutlineLoading3Quarters className="animate-spin text-3xl sm:text-2xl" />
+              <AiOutlineLoading className="animate-spin text-3xl sm:text-2xl opacity-100" />
             )}
           </button>
 
@@ -290,8 +320,11 @@ const HomePage = () => {
             </div>
 
             {/* QR Code Container */}
-            <div className="flex-none bg-gray-800 p-6 rounded-lg shadow-xl flex items-center justify-center">
-              <div className="border-2 border-emerald-500 p-5 rounded-md bg-gray-900">
+            <div className="flex-none bg-gray-100 p-3 rounded-lg shadow-xl flex items-center justify-center">
+              <div
+                ref={imageRef}
+                className="p-4 flex justify-center items-center bg-gray-100"
+              >
                 <QRCode
                   value={`${import.meta.env.VITE_FRONTEND_URL}/${shortId}`}
                   size={250}
@@ -301,9 +334,9 @@ const HomePage = () => {
                     maxWidth: "100%",
                     width: "100%",
                   }}
-                  bgColor="#111827"
-                  fgColor="#ffffff"
-                  className="rounded-md"
+                  fgColor="#111827"
+                  bgColor="#ffffff"
+                  className="rounded-sm"
                 />
               </div>
             </div>
@@ -311,7 +344,12 @@ const HomePage = () => {
 
           <div className="flex flex-col gap-4">
             {/* Download QR Code Button */}
-            <button className="w-60 px-5 bg-emerald-500 hover:bg-emerald-600 text-gray-900 font-semibold py-3 rounded-lg transition mx-auto">
+            <button
+              onClick={() => {
+                exportComponentAsPNG(imageRef);
+              }}
+              className="w-60 px-5 bg-emerald-500 hover:bg-emerald-600 text-gray-900 font-semibold py-3 rounded-lg transition mx-auto"
+            >
               Download QR Code
             </button>
 

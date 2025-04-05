@@ -6,12 +6,9 @@ import {
   FaShieldAlt,
   FaChevronDown,
   FaChevronUp,
-  FaEdit,
-  FaClock,
   FaUserShield,
-  FaSearch,
   FaTasks,
-  FaEye,
+  FaBolt,
 } from "react-icons/fa";
 
 const faqData = [
@@ -110,10 +107,13 @@ const LandingPage = () => {
             </p>
           </div>
           <div className="bg-gray-900 p-8 rounded-lg flex flex-col items-center">
-            <FaSearch className="text-emerald-400 text-5xl mb-6" />
-            <h3 className="text-xl sm:text-2xl font-semibold">Search Links</h3>
+            <FaBolt className="text-emerald-400 text-5xl mb-6" />
+            <h3 className="text-xl sm:text-2xl font-semibold">
+              Lightning Fast
+            </h3>
             <p className="mt-4 text-gray-300 text-sm sm:text-base">
-              Easily find and filter your shortened links.
+              Our platform is optimized for speed, ensuring instant
+              redirections.
             </p>
           </div>
           <div className="bg-gray-900 p-8 rounded-lg flex flex-col items-center">
