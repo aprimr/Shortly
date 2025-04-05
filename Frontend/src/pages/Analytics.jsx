@@ -61,6 +61,7 @@ export default function AnalyticsPage() {
           setMostClicked(initialClicks);
         }
       } catch (error) {
+        console.log(error);
       } finally {
         setLoading(false);
       }
@@ -176,9 +177,7 @@ export default function AnalyticsPage() {
                 </th>
                 <th className="px-4 py-2 text-left text-gray-200">Short URL</th>
                 <th className="px-4 py-2 text-left text-gray-200">Clicks</th>
-                <th className="px-4 py-2 text-left text-gray-200">
-                  Expires on
-                </th>
+                <th className="px-4 py-2 text-left text-gray-200">Expires</th>
                 <th className="px-4 py-2 text-left text-gray-200">Actions</th>
               </tr>
             </thead>
@@ -279,6 +278,7 @@ export default function AnalyticsPage() {
               {/* Short URL */}
               <p className="text-gray-400 text-sm mt-2">Short URL:</p>
               <a
+                target="_blank"
                 href={`${import.meta.env.VITE_FRONTEND_URL}/${url.shortId}`}
                 className="text-emerald-400 break-words"
               >
@@ -291,7 +291,7 @@ export default function AnalyticsPage() {
                   Clicks: <span className="text-white">{url.clicks}</span>
                 </p>
                 <p>
-                  Expires on:{" "}
+                  Expires:{" "}
                   <span className="text-white">
                     {url.expiryDate
                       ? new Date(url.expiryDate).toLocaleDateString()
@@ -351,9 +351,13 @@ const QrCodePopup = ({ closePopup, data }) => {
             <p className="text-sm sm:text-left sm:text-base mt-2 font-medium">
               Short URL:
             </p>
-            <p className="text-sm sm:text-left w-full break-words sm:text-base text-emerald-500">
+            <a
+              target="_blank"
+              href={`${shortUrl}`}
+              className="text-sm sm:text-left w-full break-words sm:text-base text-emerald-500"
+            >
               {shortUrl}
-            </p>
+            </a>
 
             <div className="w-full h-auto flex flex-wrap justify-between mt-4">
               {/* Clicks */}

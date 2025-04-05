@@ -8,6 +8,7 @@ import axios from "axios";
 
 function Redirect() {
   const navigate = useNavigate();
+  const [redirectUrl, setRedirectUrl] = useState("");
   const [error, setError] = useState("");
   const { shortId } = useParams();
 
@@ -20,6 +21,7 @@ function Redirect() {
           `${import.meta.env.VITE_BACKEND_URL}/api/v1/urls/data/${shortId}`
         );
         window.location.href = response.data.urlDetails.longUrl;
+        setRedirectUrl(response.data.urlDetails.longUrl);
       } catch (error) {
         console.log(error);
         setError(error?.response?.data?.message || "An error occurred");
@@ -50,9 +52,9 @@ function Redirect() {
           >
             <FaArrowCircleLeft className="mr-2 text-xl" /> Cancel redirect
           </button>
-          <p className="absolute bottom-6 text-sm text-gray-100">
+          <p className="absolute bottom-32 text-sm text-gray-100">
             Or{" "}
-            <a href="" className="text-emerald-400">
+            <a href={redirectUrl} className="text-emerald-400">
               {" "}
               click here{" "}
             </a>{" "}

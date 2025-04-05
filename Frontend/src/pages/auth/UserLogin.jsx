@@ -54,13 +54,13 @@ const UserLogin = () => {
 
       <div className="relative bg-gray-900 p-8 rounded-lg w-full max-w-sm md:max-w-md lg:max-w-lg">
         {/* Admin Login Btn */}
-        <button
+        {/* <button
           onClick={() => navigate("/admin/login")}
           className="absolute px-1 py-1 flex justify-center items-center top-6 right-4 text-emerald-400 bg-gray-800 rounded-md md:text-2xl lg:text-xl"
           disabled={isLoading}
         >
           <MdOutlineAdminPanelSettings className="text-2xl md:text-3xl lg:text-3xl" />
-        </button>
+        </button> */}
         <h2 className="text-3xl text-white md:text-4xl font-semibold text-center mb-6">
           Log In
         </h2>

@@ -41,18 +41,21 @@ const Footer = () => {
           </div>
           <div className="flex flex-wrap justify-center gap-4">
             <a
+              target="_blank"
               href="#"
               className="text-gray-300 hover:text-emerald-400 transition"
             >
               GitHub
             </a>
             <a
+              target="_blank"
               href="#"
               className="text-gray-300 hover:text-emerald-400 transition"
             >
               LinkedIn
             </a>
             <a
+              target="_blank"
               href="#"
               className="text-gray-300 hover:text-emerald-400 transition"
             >

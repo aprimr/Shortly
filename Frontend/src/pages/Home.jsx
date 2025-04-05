@@ -295,9 +295,13 @@ const HomePage = () => {
                   Shortened URL:
                 </strong>
                 <div className="mt-3 p-4 bg-gray-700 rounded-lg flex justify-between items-center">
-                  <span className="overflow-x-scroll truncate text-emerald-500 text-lg o">
+                  <a
+                    target="_blank"
+                    href={`${import.meta.env.VITE_FRONTEND_URL}/${shortId}`}
+                    className="overflow-x-scroll truncate text-emerald-500 text-lg o"
+                  >
                     {import.meta.env.VITE_FRONTEND_URL}/{shortId}
-                  </span>
+                  </a>
                   <button
                     onClick={handleCopy}
                     className="ml-2 text-white hover:text-emerald-500"
@@ -320,10 +324,10 @@ const HomePage = () => {
             </div>
 
             {/* QR Code Container */}
-            <div className="flex-none bg-gray-100 p-3 rounded-lg shadow-xl flex items-center justify-center">
+            <div className="flex-none bg-gray-800 p-8 rounded-lg shadow-xl flex items-center justify-center">
               <div
                 ref={imageRef}
-                className="p-4 flex justify-center items-center bg-gray-100"
+                className="p-4 flex justify-center items-center border-2 rounded-sm border-emerald-500 bg-gray-900"
               >
                 <QRCode
                   value={`${import.meta.env.VITE_FRONTEND_URL}/${shortId}`}
@@ -334,8 +338,8 @@ const HomePage = () => {
                     maxWidth: "100%",
                     width: "100%",
                   }}
-                  fgColor="#111827"
-                  bgColor="#ffffff"
+                  bgColor="#111827"
+                  fgColor="#ffffff"
                   className="rounded-sm"
                 />
               </div>

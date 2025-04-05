@@ -12,7 +12,6 @@ import NotFound from "./static/NotFound";
 
 import UserLogin from "./pages/auth/UserLogin";
 import UserSignup from "./pages/auth/UserSignup";
-import AdminLogin from "./pages/auth/AdminLogin";
 
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
@@ -30,6 +29,7 @@ import About from "./static/About";
 import Contact from "./static/Contact";
 import TermsAndConditions from "./static/Terms&Conditions";
 import Redirect from "./pages/Redirect";
+import PageNotFound from "./static/NotFound";
 
 const AppLayout = () => {
   const user = useSelector((state) => state.auth.user);
@@ -55,11 +55,7 @@ const AppLayout = () => {
     <>
       {!hideNavbar && <Navbar />}
       <Routes>
-        <Route
-          path="/"
-          element={!user ? <LandingPage /> : <Navigate to="/home" />}
-        />
-
+        {/* Private Routes */}
         <Route path="/home" element={user ? <Home /> : <Navigate to="/" />} />
         <Route
           path="/analytics"
@@ -71,6 +67,11 @@ const AppLayout = () => {
         />
         <Route path="/help" element={user ? <Help /> : <Navigate to="/" />} />
 
+        {/* Public Routes */}
+        <Route
+          path="/"
+          element={!user ? <LandingPage /> : <Navigate to="/home" />}
+        />
         <Route
           path="/verify-account"
           element={!user ? <VerifyAccount /> : <Navigate to="/" />}
@@ -92,6 +93,7 @@ const AppLayout = () => {
           element={!user ? <TermsAndConditions /> : <Navigate to="/" />}
         />
 
+        <Route path="/404" element={<NotFound />} />
         <Route
           path="/login"
           element={!user ? <UserLogin /> : <Navigate to="/home" />}
@@ -100,9 +102,10 @@ const AppLayout = () => {
           path="/signup"
           element={!user ? <UserSignup /> : <Navigate to="/home" />}
         />
-        <Route path="/admin/login" element={<AdminLogin />} />
 
         <Route path="/:shortId" element={<Redirect />} />
+        <Route path="/*" element={<PageNotFound />} />
+
         <Route path="/test" element={<Test />} />
       </Routes>
       {!hideFooter && (user ? <SecondaryFooter /> : <Footer />)}

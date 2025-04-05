@@ -1,6 +1,7 @@
 import generateId from "../services/generateId.js";
 import Urls from "../models/url.model.js";
 import Users from "../models/user.model.js";
+import { ObjectId } from "mongodb";
 
 const shortUrl = async (req, res) => {
   const { username, longUrl, customId, expiresOn } = req.body;
@@ -76,6 +77,7 @@ const getUrls = async (req, res) => {
 
 const deleteUrl = async (req, res) => {
   const { id } = req.body;
+  console.log(id);
   try {
     if (!id) return res.status(400).json({ message: "ID is required" });
 

@@ -170,7 +170,7 @@ const Profile = () => {
 
   return (
     <div className="relative min-h-screen min-w-full bg-gray-900 text-white flex justify-center items-center">
-      <div className="min-h-screen max-w-full md:max-w-3xl w-full bg-gray-800 p-6 shadow-xl space-y-6 flex flex-col justify-center">
+      <div className="min-h-screen max-w-full md:max-w-3xl w-full bg-gray-900 border-r border-l border-gray-800  p-6 shadow-xl space-y-6 flex flex-col justify-center">
         {/* Profile Header */}
         <div className="flex flex-col items-center gap-3 relative">
           {/* Profile Picture */}
@@ -214,7 +214,7 @@ const Profile = () => {
           )}
 
           {/* Full Name Edit */}
-          <div className="bg-gray-700 p-4 rounded-lg">
+          <div className="bg-gray-800 p-4 rounded-lg">
             <label
               htmlFor="fullname"
               className="text-sm sm:text-lg text-gray-400"
@@ -227,7 +227,7 @@ const Profile = () => {
               value={fullname}
               onChange={handleFullnameChange}
               disabled={!isEditing}
-              className={`w-full mt-2 px-4 py-2 rounded-lg bg-gray-600 text-sm sm:text-lg text-white focus:outline-none ${
+              className={`w-full mt-2 px-4 py-2 rounded-lg bg-gray-700 text-sm sm:text-lg text-white focus:outline-none ${
                 isEditing
                   ? "focus:ring-2 focus:ring-emerald-500"
                   : "opacity-50 cursor-not-allowed"
@@ -236,7 +236,7 @@ const Profile = () => {
           </div>
 
           {/* Email */}
-          <div className="bg-gray-700 p-4 rounded-lg">
+          <div className="bg-gray-800 p-4 rounded-lg">
             <label htmlFor="email" className="text-sm sm:text-lg text-gray-400">
               Email:
             </label>
@@ -245,18 +245,18 @@ const Profile = () => {
               id="email"
               value={email}
               disabled
-              className="w-full mt-2 px-4 py-2 rounded-lg bg-gray-600 text-sm sm:text-lg text-white opacity-50 cursor-not-allowed"
+              className="w-full mt-2 px-4 py-2 rounded-lg bg-gray-700 text-sm sm:text-lg text-white opacity-50 cursor-not-allowed"
             />
             {isEditing && (
-              <p className="text-[10px] md:text-sm mt-1 text-red-400">
-                Email cannot be edited currently.
+              <p className="text-[10px] md:text-sm mt-1 text-rose-500">
+                Email cannot be edited.
               </p>
             )}
           </div>
 
           {/* Change Password */}
           {isEditing && (
-            <div className="bg-gray-700 p-4 rounded-lg flex flex-col gap-3">
+            <div className="bg-gray-800 p-4 rounded-lg flex flex-col gap-3">
               <label className="text-sm sm:text-lg text-gray-400">
                 Change Password:
               </label>
@@ -265,18 +265,18 @@ const Profile = () => {
                 placeholder="Old Password"
                 value={oldPassword}
                 onChange={handleOldPasswordChange}
-                className="w-full px-4 py-2 rounded-lg bg-gray-600 text-sm sm:text-lg text-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="w-full px-4 py-2 rounded-lg bg-gray-700 text-sm sm:text-lg text-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
               />
               <input
                 type="password"
                 placeholder="New Password"
                 value={newPassword}
                 onChange={handleNewPasswordChange}
-                className="w-full px-4 py-2 rounded-lg bg-gray-600 text-sm sm:text-lg text-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="w-full px-4 py-2 rounded-lg bg-gray-700 text-sm sm:text-lg text-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
               />
               {/* error */}
               {passwordError && (
-                <span className="text-sm rounded-sm text-white bg-red-500 px-4 py-1">
+                <span className="text-sm rounded-sm text-white bg-rose-500 px-4 py-1">
                   {passwordError}
                 </span>
               )}
@@ -308,7 +308,7 @@ const Profile = () => {
         </div>
 
         {/* Date of Joining */}
-        <div className="bg-gray-700 p-4 rounded-lg">
+        <div className="bg-gray-800 p-4 rounded-lg">
           <label
             htmlFor="joinedDate"
             className="text-sm sm:text-lg text-gray-400"
@@ -320,10 +320,10 @@ const Profile = () => {
             id="joinedDate"
             value={joined}
             disabled
-            className="w-full mt-2 px-4 py-2 rounded-lg bg-gray-600 text-sm sm:text-lg text-white opacity-50 cursor-not-allowed"
+            className="w-full mt-2 px-4 py-2 rounded-lg bg-gray-700 text-sm sm:text-lg text-white opacity-50 cursor-not-allowed"
           />
           {isEditing && (
-            <p className="text-[10px] md:text-sm mt-1 text-red-400">
+            <p className="text-[10px] md:text-sm mt-1 text-rose-500">
               Joined date cannot be edited.
             </p>
           )}
@@ -390,7 +390,7 @@ const Profile = () => {
               placeholder="Enter Password"
               value={deletePassword}
               onChange={(e) => setDeletePassword(e.target.value)}
-              className="w-full px-4 py-2 mt-2 rounded-md bg-gray-600 text-sm sm:text-lg text-white focus:outline-none focus:ring-1 focus:ring-rose-500"
+              className="w-full px-4 py-2 mt-2 rounded-md bg-gray-700 text-sm sm:text-lg text-white focus:outline-none focus:ring-1 focus:ring-rose-500"
             />
             {deleteError && (
               <span className="text-xs mt-2 text-red-500 py-0 px-1 flex flex-row gap-1 items-center">
