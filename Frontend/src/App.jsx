@@ -27,7 +27,7 @@ import ForgotPassword from "./pages/security/ForgotPassword";
 import Help from "./static/Help";
 import About from "./static/About";
 import Contact from "./static/Contact";
-import TermsAndConditions from "./static/Terms&Conditions";
+import TermsAndPrivacy from "./static/Terms&Conditions";
 import Redirect from "./pages/Redirect";
 import PageNotFound from "./static/NotFound";
 
@@ -89,8 +89,8 @@ const AppLayout = () => {
           element={!user ? <Contact /> : <Navigate to="/" />}
         />
         <Route
-          path="/terms"
-          element={!user ? <TermsAndConditions /> : <Navigate to="/" />}
+          path="/terms-and-privacy"
+          element={!user ? <TermsAndPrivacy /> : <Navigate to="/" />}
         />
 
         <Route path="/404" element={<NotFound />} />

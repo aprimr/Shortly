@@ -315,11 +315,11 @@ const QrCodePopup = ({ closePopup, data }) => {
     data.url.longUrl
   }, Short Url: ${shortUrl}, Created at: ${
     data.url.createdAt?.split("T")[0]
-  }, Expires on: ${data.url.expiryDate?.split("T")[0]}`;
+  }, Expires on: ${data.url.expiryDate?.split("T")[0] || "Never"}`;
 
   return (
-    <div className="fixed inset-0 h-[100vh] flex items-center justify-center bg-gray-900 bg-opacity-75 p-8">
-      <div className="relative  w-full max-w-md sm:max-w-lg md:max-w-2xl bg-gray-800 p-8 md:p-10 rounded-lg shadow-lg flex flex-col">
+    <div className="fixed inset-0 h-screen w-screen flex items-center justify-center bg-gray-900 bg-opacity-75 p-4 sm:p-6 overflow-auto z-50">
+      <div className="relative w-full max-w-md sm:max-w-lg md:max-w-2xl bg-gray-800 p-4 sm:p-6 md:p-10 rounded-lg shadow-lg flex flex-col max-h-[95vh] overflow-y-auto">
         {/* Number */}
         <span className="absolute top-0 left-0 border-2 border-emerald-500 text-white px-3 py-1 rounded-br-lg rounded-tl-lg text-sm sm:text-base">
           {data.sn + 1}
@@ -333,71 +333,57 @@ const QrCodePopup = ({ closePopup, data }) => {
           ✕
         </button>
 
-        <div className="flex w-full flex-col md:flex-row items-top justify-between gap-4 md:gap-6">
+        <div className="flex flex-col md:flex-row gap-6 mt-6 md:mt-10">
+          {/* Left Section */}
           <div className="flex-1 w-full text-white">
-            <h2 className="text-xl sm:text-2xl text-center font-semibold">
+            <h2 className="text-xl sm:text-2xl text-center font-semibold mb-4">
               URL Details
             </h2>
 
-            {/* Original URL */}
-            <p className="text-sm sm:text-left sm:text-base mt-2 font-medium">
-              Original URL:
-            </p>
-            <p className="text-sm sm:text-left w-full break-words sm:text-base text-emerald-500">
-              {data.url.longUrl}
-            </p>
+            <p className="text-sm sm:text-base font-medium">Original URL:</p>
+            <div className="max-w-full overflow-x-auto rounded p-1 mb-2">
+              <p className="text-sm sm:text-base text-emerald-500 break-all">
+                {data.url.longUrl}
+              </p>
+            </div>
 
-            {/* Short URL */}
-            <p className="text-sm sm:text-left sm:text-base mt-2 font-medium">
-              Short URL:
-            </p>
-            <a
-              target="_blank"
-              href={`${shortUrl}`}
-              className="text-sm sm:text-left w-full break-words sm:text-base text-emerald-500"
-            >
-              {shortUrl}
-            </a>
+            <p className="text-sm sm:text-base font-medium">Short URL:</p>
+            <div className="max-w-full overflow-x-auto mb-2">
+              <a
+                target="_blank"
+                href={`${shortUrl}`}
+                className="text-sm sm:text-base text-emerald-500 break-all"
+              >
+                {shortUrl}
+              </a>
+            </div>
 
-            <div className="w-full h-auto flex flex-wrap justify-between mt-4">
-              {/* Clicks */}
-              <div className="w-auto">
-                <p className="text-sm sm:text-left sm:text-base font-medium">
-                  Clicks:
-                </p>
-                <p className="text-sm sm:text-left sm:text-base text-emerald-500">
-                  {data.url.clicks}
-                </p>
+            <div className="flex flex-wrap justify-between mt-4 gap-4">
+              <div>
+                <p className="text-sm font-medium">Clicks:</p>
+                <p className="text-sm text-emerald-500">{data.url.clicks}</p>
               </div>
-
-              {/* Created Date */}
-              <div className="w-auto">
-                <p className="text-sm sm:text-left sm:text-base font-medium">
-                  Created at:
-                </p>
-                <p className="text-sm sm:text-left sm:text-base text-emerald-500">
+              <div>
+                <p className="text-sm font-medium">Created at:</p>
+                <p className="text-sm text-emerald-500">
                   {data.url.createdAt?.split("T")[0] || "Never"}
                 </p>
               </div>
-
-              {/* Expiry Date */}
-              <div className="w-auto">
-                <p className="text-sm sm:text-left sm:text-base font-medium">
-                  Expires on:
-                </p>
-                <p className="text-sm sm:text-left sm:text-base text-emerald-500">
+              <div>
+                <p className="text-sm font-medium">Expires on:</p>
+                <p className="text-sm text-emerald-500">
                   {data.url.expiryDate?.split("T")[0] || "Never"}
                 </p>
               </div>
             </div>
           </div>
 
-          {/* QR Code */}
-          <div className="flex justify-center">
-            <div className="w-40 h-40 px-2 bg-white flex items-center justify-center rounded-sm">
+          {/* QR Code Section */}
+          <div className="flex justify-center items-center md:items-start">
+            <div className="w-32 h-32 sm:w-40 sm:h-40 bg-white p-2 rounded shadow-md flex items-center justify-center">
               <QrCode
                 value={JSON.stringify(qrPayload)}
-                size={200}
+                size={160}
                 level="Q"
                 bgColor="#ffffff"
                 fgColor="#000000"

@@ -25,10 +25,7 @@ const Contact = () => {
           <ul className="text-sm sm:text-base md:text-lg text-gray-300">
             <li className="mb-2">
               <span className="font-semibold">Email:</span>{" "}
-              support.shortly@gmail.com
-            </li>
-            <li className="mb-2">
-              <span className="font-semibold">Phone:</span> +977 1234567890
+              connect.shortly@gmail.com
             </li>
           </ul>
 

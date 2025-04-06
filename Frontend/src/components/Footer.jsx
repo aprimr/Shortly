@@ -33,30 +33,30 @@ const Footer = () => {
               Contact
             </NavLink>
             <NavLink
-              to="/terms"
+              to="/terms-and-privacy"
               className="text-emerald-400 hover:text-emerald-300 transition"
             >
-              Terms & Conditions
+              Terms & Privacy
             </NavLink>
           </div>
           <div className="flex flex-wrap justify-center gap-4">
             <a
               target="_blank"
-              href="#"
+              href="https://github.com/aprimr"
               className="text-gray-300 hover:text-emerald-400 transition"
             >
               GitHub
             </a>
             <a
               target="_blank"
-              href="#"
+              href="https://www.linkedin.com/in/aprimregmi0/"
               className="text-gray-300 hover:text-emerald-400 transition"
             >
               LinkedIn
             </a>
             <a
               target="_blank"
-              href="#"
+              href="https://www.x.com/aprimre"
               className="text-gray-300 hover:text-emerald-400 transition"
             >
               Twitter
@@ -96,10 +96,10 @@ const Footer = () => {
               Contact
             </NavLink>
             <NavLink
-              to="/terms"
+              to="/terms-and-privacy"
               className="text-emerald-400 hover:text-emerald-300 transition"
             >
-              Terms & Conditions
+              Terms & Privacy
             </NavLink>
           </div>
           {/* Bottom Row - Copyright Left, Social Right */}
@@ -109,19 +109,22 @@ const Footer = () => {
             </p>
             <div className="flex space-x-6">
               <a
-                href="#"
+                target="_blank"
+                href="https://github.com/aprimr"
                 className="text-gray-300 hover:text-emerald-400 transition"
               >
                 GitHub
               </a>
               <a
-                href="#"
+                target="_blank"
+                href="https://www.linkedin.com/in/aprimregmi0/"
                 className="text-gray-300 hover:text-emerald-400 transition"
               >
                 LinkedIn
               </a>
               <a
-                href="#"
+                target="_blank"
+                href="https://www.x.com/aprimre"
                 className="text-gray-300 hover:text-emerald-400 transition"
               >
                 Twitter
